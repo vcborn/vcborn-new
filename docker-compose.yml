@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/vcborn-new/src
+    command: sh -c "npm build && npm run start"
+    ports:
+      - "3000:3000"
