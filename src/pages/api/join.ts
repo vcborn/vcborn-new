@@ -115,7 +115,9 @@ const handler = async (req, res) => {
     content: htmlMsg,
     ip: clientIp
   }
+  //@ts-ignore
   const hostMessage = render(Email({ ...msgData, type: "admin" }))
+  //@ts-ignore
   const clientMessage = render(Email({ ...msgData, type: "client" }))
 
   try {
