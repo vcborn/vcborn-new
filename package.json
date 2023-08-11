@@ -22,7 +22,7 @@
     "@fontsource/noto-sans-sc": "^4.5.12",
     "@fontsource/poppins": "^5.0.3",
     "@headlessui/react": "^1.7.15",
-    "@react-email/button": "^0.0.9",
+    "@react-email/button": "^0.0.10",
     "@react-email/container": "^0.0.8",
     "@react-email/head": "^0.0.5",
     "@react-email/html": "^0.0.4",
