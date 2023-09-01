@@ -16,7 +16,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
-    "@directus/sdk": "^10.3.3",
+    "@directus/sdk": "^11.0.3",
     "@fontsource/noto-sans-jp": "^5.0.7",
     "@fontsource/noto-sans-kr": "^5.0.7",
     "@fontsource/noto-sans-sc": "^5.0.7",
