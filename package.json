@@ -75,7 +75,7 @@
     "eslint-config-next": "^13.4.13",
     "eslint-config-prettier": "^9.0.0",
     "html-loader": "^4.2.0",
-    "next-sitemap": "^4.2.2",
+    "next-sitemap": "^4.2.3",
     "prettier": "^3.0.1",
     "typescript": "^5.1.6"
   }
