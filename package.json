@@ -63,7 +63,7 @@
     "tailwindcss-brand-colors": "^0.3.3"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.4.13",
+    "@next/bundle-analyzer": "^13.5.3",
     "@next/eslint-plugin-next": "^13.4.13",
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
