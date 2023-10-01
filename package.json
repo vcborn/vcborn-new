@@ -35,7 +35,7 @@
     "@types/asana": "^0.18.12",
     "asana": "^2.0.2",
     "autoprefixer": "^10.4.15",
-    "axios": "^1.4.0",
+    "axios": "^1.5.1",
     "cookies-next": "^2.1.2",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.15.1",
