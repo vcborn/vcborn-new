@@ -67,8 +67,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             value: `${req.body.email}`,
           },
           {
-            name: 'Twitter',
-            value: `[${req.body.twitter}](https://twitter.com/${req.body.twitter.slice(1)})`,
+            name: 'X(Twitter)',
+            value: `[${req.body.twitter}](https://x.com/${req.body.twitter.slice(1)})`,
           },
           {
             name: '所属中のグループ',

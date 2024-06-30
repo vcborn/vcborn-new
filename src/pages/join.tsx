@@ -169,7 +169,7 @@ export default function Join() {
 
           <div className='inline-flex flex-col md:flex-row md:items-center md:gap-4'>
             <label className='text-lg md:w-64' htmlFor='twitter'>
-              TwitterID<span className='text-red-500 font-bold'>*</span>
+              X(Twitter) ID<span className='text-red-500 font-bold'>*</span>
             </label>
             <div className='flex flex-col gap-1'>
               <input
