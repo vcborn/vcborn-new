@@ -25,3 +25,14 @@ export interface TypeNewsFields {
 
 export type TypeNewsSkeleton = EntrySkeletonType<TypeNewsFields, "news">;
 export type TypeNews<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeNewsSkeleton, Modifiers, Locales>;
+
+export interface TypeSupportFields {
+  title: EntryFieldTypes.Symbol;
+  category: EntryFieldTypes.Symbol<"MCborn" | "VCLinux" | "VCMi">;
+  date_created: EntryFieldTypes.Date;
+  date_updated?: EntryFieldTypes.Date;
+  content: EntryFieldTypes.RichText;
+}
+
+export type TypeSupportSkeleton = EntrySkeletonType<TypeSupportFields, "support">;
+export type TypeSupport<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeSupportSkeleton, Modifiers, Locales>;
