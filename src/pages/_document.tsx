@@ -9,8 +9,8 @@ export default class MyDocument extends Document {
           <script
             async
             defer
-            data-website-id='aaaac897-65a5-40c4-be64-62f96ea83415'
-            src='https://analytics.vcborn.com/umami.js'
+            data-website-id='d73053b1-dfba-41b5-aa40-1f1cb6c58915'
+            src='https://analytics.ja1ykl.com/script.js'
           ></script>
           {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
             <Script

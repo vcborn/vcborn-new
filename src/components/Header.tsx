@@ -1,4 +1,4 @@
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { setCookie } from 'cookies-next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,7 +29,14 @@ function Header() {
   }
 
   const NextLink = ({ href, locale, children, ...rest }) => (
-    <Link href={href} locale={locale} {...rest} scroll={false} passHref>
+    <Link
+      href={href}
+      locale={locale}
+      {...rest}
+      scroll={false}
+      className='group data-[focus]:bg-black data-[focus]:text-white'
+      passHref
+    >
       {children}
     </Link>
   )
@@ -114,12 +121,12 @@ function Header() {
             </li>
             <li className='flex'>
               <Menu as='div'>
-                <Menu.Button
+                <MenuButton
                   className='flex duration-200 hover:opacity-70'
                   aria-label='Switch Language'
                 >
                   <IoGlobeSharp size={25} />
-                </Menu.Button>
+                </MenuButton>
                 <Transition
                   as={Fragment}
                   enter='transition ease-out duration-100'
@@ -129,64 +136,30 @@ function Header() {
                   leaveFrom='transform opacity-100 scale-100'
                   leaveTo='transform opacity-0 scale-95'
                 >
-                  <Menu.Items className='absolute top-20 right-8 text-right bg-white text-black w-32'>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <NextLink href={moveToLangPage()} locale='ja'>
-                          <span
-                            className={classNames(
-                              active && 'bg-black text-white',
-                              'block px-4 py-2',
-                            )}
-                          >
-                            日本語
-                          </span>
-                        </NextLink>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <NextLink href={moveToLangPage()} locale='en'>
-                          <span
-                            className={classNames(
-                              active && 'bg-black text-white',
-                              'block px-4 py-2',
-                            )}
-                          >
-                            English
-                          </span>
-                        </NextLink>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <NextLink href={moveToLangPage()} locale='cn'>
-                          <span
-                            className={classNames(
-                              active && 'bg-black text-white',
-                              'block px-4 py-2',
-                            )}
-                          >
-                            简体中文
-                          </span>
-                        </NextLink>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <NextLink href={moveToLangPage()} locale='ko'>
-                          <span
-                            className={classNames(
-                              active && 'bg-black text-white',
-                              'block px-4 py-2',
-                            )}
-                          >
-                            한국어
-                          </span>
-                        </NextLink>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
+                  <MenuItems className='absolute top-20 right-8 text-right bg-white text-black w-32'>
+                    <MenuItem>
+                      <NextLink href={moveToLangPage()} locale='ja'>
+                        <span className='block px-4 py-2 group-data-[focus]:bg-black'>日本語</span>
+                      </NextLink>
+                    </MenuItem>
+                    <MenuItem>
+                      <NextLink href={moveToLangPage()} locale='en'>
+                        <span className='block px-4 py-2 group-data-[focus]:bg-black'>English</span>
+                      </NextLink>
+                    </MenuItem>
+                    <MenuItem>
+                      <NextLink href={moveToLangPage()} locale='cn'>
+                        <span className='block px-4 py-2 group-data-[focus]:bg-black'>
+                          简体中文
+                        </span>
+                      </NextLink>
+                    </MenuItem>
+                    <MenuItem>
+                      <NextLink href={moveToLangPage()} locale='ko'>
+                        <span className='block px-4 py-2 group-data-[focus]:bg-black'>한국어</span>
+                      </NextLink>
+                    </MenuItem>
+                  </MenuItems>
                 </Transition>
               </Menu>
             </li>

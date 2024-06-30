@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://vcborn.com
+
+# Sitemaps
+Sitemap: https://vcborn.com/sitemap.xml
