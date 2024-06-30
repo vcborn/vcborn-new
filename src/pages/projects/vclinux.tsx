@@ -22,47 +22,50 @@ export default function VCLinux() {
     name: {
       arm64: 'arm64',
       amd64: 'amd64',
-      colorfulbox: 'Colorfulbox',
-      osdn: 'OSDN',
+      osdn: 'OSDN(IIJ)',
+      osdn2: 'OSDN(JAIST)',
+      mirror: 'VCborn Mirror',
       gdrive: 'Google Drive',
       onedrive: 'OneDrive',
       mega: 'MEGA',
-      yoshis: 'yoshis.jp',
     },
     beta3: {
       amd64: {
-        osdn: 'https://osdn.net/dl/vclinux/vclinux-beta3-amd64.iso',
+        osdn: 'https://ftp.iij.ad.jp/pub/osdn.jp/vclinux/78014/vclinux-beta3-amd64.iso',
+        osdn2: 'https://ftp.jaist.ac.jp/pub/sourceforge.jp/vclinux/78014/vclinux-beta3-amd64.iso',
         gdrive:
           'https://drive.google.com/file/d/1uH7dF4hKre7ioIo_e5Drt2EcPxv7fAEH/view?usp=share_link',
         mega: 'https://mega.nz/file/lHQBlDRI#KObIXw7yh-XXBFKZhbQ7yC323iOhTlMbBAWFnVBEA7U',
-        colorfulbox: 'https://mirror.vcborn.com/vclinux/vclinux-beta3-amd64.iso',
+        mirror: 'https://mirror.vcborn.com/vclinux/vclinux-beta3-amd64.iso',
       },
       arm64: {
-        osdn: 'https://osdn.net/dl/vclinux/vclinux-beta3-arm64.iso',
+        osdn: 'https://ftp.iij.ad.jp/pub/osdn.jp/vclinux/78014/vclinux-beta3-arm64.iso',
+        osdn2: 'https://ftp.jaist.ac.jp/pub/sourceforge.jp/vclinux/78014/vclinux-beta3-arm64.iso',
         gdrive:
           'https://drive.google.com/file/d/1Q6Yn15F-7UYiCQYVtpj_kGBoPK6wpf0M/view?usp=share_link',
         mega: 'https://mega.nz/file/hXpjyAqa#5XHow8uaxMMLm7CdB8gXxDAmU4ofrJGv-XtRWt_vq8Q',
-        colorfulbox: 'https://mirror.vcborn.com/vclinux/vclinux-beta3-arm64.iso',
+        mirror: 'https://mirror.vcborn.com/vclinux/vclinux-beta3-arm64.iso',
       },
     },
     beta2: {
       amd64: {
-        osdn: 'https://osdn.net/dl/vclinux/vclinux-beta2.iso',
+        osdn: 'https://ftp.iij.ad.jp/pub/osdn.jp/vclinux/76664/vclinux-beta2.iso',
+        osdn2: 'https://ftp.jaist.ac.jp/pub/sourceforge.jp/vclinux/76664/vclinux-beta2.iso',
         gdrive:
           'https://drive.google.com/file/d/1I1x1whZ-TmevS6wlSFuEsj_2-w-tNetz/view?usp=sharing',
         yoshis: 'https://mirror.yoshis.jp/vclinux/beta2/vclinux-beta2.iso',
         mega: 'https://mega.nz/file/gaRTFT4Y#4OQNa0HAwnFfbNsTzYFJB20ZHOpu_t-6zApLZXRIsi8',
-        colorfulbox: 'https://mirror.vcborn.com/vclinux/vclinux-beta2.iso',
+        mirror: 'https://mirror.vcborn.com/vclinux/vclinux-beta2.iso',
       },
     },
     beta1: {
       amd64: {
-        osdn: 'https://osdn.net/dl/vclinux/vclinux-beta1.iso',
+        osdn: 'https://ftp.iij.ad.jp/pub/osdn.jp/vclinux/76663/vclinux-beta1.iso',
+        osdn2: 'https://ftp.jaist.ac.jp/pub/sourceforge.jp/vclinux/76663/vclinux-beta1.iso',
         gdrive:
           'https://drive.google.com/file/d/1GG8DluckSuLkkWdG-Uhvw5Hynb62MtlU/view?usp=sharing',
-        yoshis: 'https://mirror.yoshis.jp/vclinux/vclinux-beta1.iso',
         mega: 'https://mega.nz/file/cGp0GRbA#rlLG8pU4n7aJc4f8UtzouBuYPpGgaDVEwu0_d5rSaNw',
-        colorfulbox: 'https://mirror.vcborn.com/vclinux/vclinux-beta1.iso',
+        mirror: 'https://mirror.vcborn.com/vclinux/vclinux-beta1.iso',
       },
     },
   }
