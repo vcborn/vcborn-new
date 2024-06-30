@@ -9,6 +9,15 @@ import { LimitChecker } from '@/lib/limitChecker'
 const limitChecker = LimitChecker()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://help.vcborn.com");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("Content-Type", "application/json");
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
   const token = req.body.token
   const origin = req.headers.host
   const hostname = origin.replace(/https:\/\//, '')

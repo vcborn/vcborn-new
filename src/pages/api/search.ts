@@ -6,8 +6,7 @@ import { LimitChecker } from "@/lib/limitChecker";
 const limitChecker = LimitChecker();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://help.vcborn.com");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
