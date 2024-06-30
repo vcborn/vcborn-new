@@ -6,7 +6,7 @@
   "author": "wamo <ainznino@pm.me>",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "dev:email": "email dev",
     "bundle-analyzer": "cross-env ANALYZE=true next build",
     "build": "next build && next-sitemap --config sitemap.config.js",

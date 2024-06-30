@@ -6,6 +6,16 @@ import { LimitChecker } from "@/lib/limitChecker";
 const limitChecker = LimitChecker();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("Content-Type", "application/json");
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
   try {
     const { query } = req.query;
     const clientIp = requestIp.getClientIp(req) || 'IP_NOT_FOUND'
@@ -19,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       })
     }
     const data = await contentfulClient.getEntries({
-      content_type: "news",
+      content_type: "support",
       query: query.toString(),
     });
     res.status(200).json(data);
