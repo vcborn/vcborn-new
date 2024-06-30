@@ -53,7 +53,6 @@ export default function VCLinux() {
         osdn2: 'https://ftp.jaist.ac.jp/pub/sourceforge.jp/vclinux/76664/vclinux-beta2.iso',
         gdrive:
           'https://drive.google.com/file/d/1I1x1whZ-TmevS6wlSFuEsj_2-w-tNetz/view?usp=sharing',
-        yoshis: 'https://mirror.yoshis.jp/vclinux/beta2/vclinux-beta2.iso',
         mega: 'https://mega.nz/file/gaRTFT4Y#4OQNa0HAwnFfbNsTzYFJB20ZHOpu_t-6zApLZXRIsi8',
         mirror: 'https://mirror.vcborn.com/vclinux/vclinux-beta2.iso',
       },

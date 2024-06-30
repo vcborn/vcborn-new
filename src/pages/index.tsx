@@ -175,7 +175,7 @@ const Home = ({ news }: { news: EntryCollection<TypeNewsSkeleton, undefined, str
                 </div>
                 <Link
                   scroll={false}
-                  href='/projects/sharoho'
+                  href='/projects/sharoho-bot'
                   className='mt-4 border-4 px-4 py-2 font-semibold text-lg border-white inline-block duration-200 hover:bg-white hover:text-black'
                 >
                   LEARN MORE
