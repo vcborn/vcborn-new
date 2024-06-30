@@ -7,26 +7,25 @@ import { useEffect } from 'react'
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 import Layout, { siteTitle } from '@/components/layout'
 import { useLocale } from '@/hooks/useLocale'
-import { getDirectusClient } from '@/lib/directus'
+import contentfulClient from '@/lib/contentful'
 // eslint-disable-next-line import/no-unresolved
 import '@splidejs/splide/css/core'
+import { TypeNewsSkeleton } from '@/types/contentful'
+import { Asset, EntryCollection } from 'contentful'
 
 export const getStaticProps = async (context) => {
-  const directus = await getDirectusClient()
-  const res = await directus.items('news').readByQuery({
-    sort: ['-date_created'],
-    filter: {
-      draft: false,
-    },
+  const news = await contentfulClient.getEntries<TypeNewsSkeleton>({
+    content_type: 'news',
+    order: ['-fields.date_created'],
+    limit: 3,
   })
-  const news = res.data
 
   return {
     props: { news },
   }
 }
 
-const Home = (news) => {
+const Home = ({ news }: { news: EntryCollection<TypeNewsSkeleton, undefined, string> }) => {
   const { t } = useLocale()
 
   useEffect(() => {
@@ -223,23 +222,23 @@ const Home = (news) => {
           </span>
         </h2>
         <div className='mt-16 flex flex-col gap-5'>
-          {news.news.map((item, index) => {
+          {news.items.map((item, index) => {
             return (
               index <= 2 && (
-                <article key={item.id}>
+                <article key={item.fields.slug}>
                   <Link
                     scroll={false}
                     className='mx-auto flex flex-col gap-8 md:flex-row md:items-center md:mx-0 duration-200 md:hover:bg-gray-100'
-                    href={`/news/${item.id}`}
+                    href={`/news/${item.fields.slug}`}
                     locale='ja'
                     passHref
                   >
                     <div>
                       <Image
-                        alt={item.id}
+                        alt={item.fields.slug}
                         src={
-                          item.thumbnail
-                            ? `https://console.vcborn.com/assets/${item.thumbnail}`
+                          item.fields.thumbnail
+                            ? `https:${(item.fields.thumbnail as Asset).fields.file.url}`
                             : '/images/ogp.jpg'
                         }
                         width={360}
@@ -248,9 +247,9 @@ const Home = (news) => {
                     </div>
                     <div>
                       <time className='font-semibold text-lg md:text-xl'>
-                        {format(new Date(item.date_created), 'yyyy.MM.dd')}
+                        {format(new Date(item.fields.date_created), 'yyyy.MM.dd')}
                       </time>
-                      <h3 className='font-semibold text-xl md:text-3xl'>{item.title}</h3>
+                      <h3 className='font-semibold text-xl md:text-3xl'>{item.fields.title}</h3>
                     </div>
                   </Link>
                 </article>

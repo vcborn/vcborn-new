@@ -6,11 +6,7 @@ interface EmailProps {
   name: string
   furigana: string
   email: string
-  twitter: string
-  group?: string
-  active: string
-  departments: string
-  works?: string
+  subject: string
   content: string
   ip?: string
 }
@@ -20,12 +16,8 @@ const Email = ({
   name = '山田太郎',
   furigana = 'やまだたろう',
   email = 'sample@example.com',
-  twitter = 'example',
-  group = 'なし',
-  active = '1日～3日',
-  departments = 'Web開発',
+  subject = 'ご質問・お問い合わせ',
   content = 'メッセージ',
-  works,
   ip,
 }: EmailProps) => {
   return (
@@ -56,16 +48,14 @@ const Email = ({
             </Link>
           </Section>
           <Text style={h1}>
-            {type === 'client' ? 'ご応募ありがとうございます' : '新規応募がありました'}
+            {type === 'client' ? 'お問い合わせ内容の確認' : 'お問い合わせ内容の確認'}
           </Text>
           <Text style={heroText}>
             {type === 'client'
-              ? 'VCbornにご興味をお寄せいただきありがとうございます。'
-              : 'VCbornへ新規応募が届きました。'}
+              ? 'お問い合わせありがとうございます。'
+              : '新規問い合わせがありました。'}
             <br />
-            {type === 'client'
-              ? 'こちらは入力していただいた応募内容です。'
-              : '早めに確認・連絡されることをお勧めします。'}
+            {type === 'client' ? 'お問い合わせ内容はこちらです。' : '容はこちらです。'}
           </Text>
 
           <Section style={form}>
@@ -80,37 +70,11 @@ const Email = ({
               <Text style={sectionText}>{email}</Text>
             </Section>
             <Section style={section}>
-              <Text style={sectionTitle}>Twitter</Text>
-              <Link href={`https://twitter.com/${twitter.slice(1)}`}>
-                <Text style={sectionText}>{twitter}</Text>
-              </Link>
+              <Text style={sectionTitle}>お問い合わせ項目</Text>
+              <Text style={sectionText}>{subject}</Text>
             </Section>
             <Section style={section}>
-              <Text style={sectionTitle}>所属グループ</Text>
-              <Text style={sectionText}>{group}</Text>
-            </Section>
-            <Section style={section}>
-              <Text style={sectionTitle}>平均浮上日数（一週間）</Text>
-              <Text style={sectionText}>{active}</Text>
-            </Section>
-            <Section style={section}>
-              <Text style={sectionTitle}>希望部署</Text>
-              <Text style={sectionText}>{departments}</Text>
-            </Section>
-            {works && (
-              <Section style={section}>
-                <Text style={sectionTitle}>実績</Text>
-                {works.startsWith('https://') ? (
-                  <Link href={works}>
-                    <Text style={sectionText}>{works}</Text>
-                  </Link>
-                ) : (
-                  <Text style={sectionText}>{works}</Text>
-                )}
-              </Section>
-            )}
-            <Section style={section}>
-              <Text style={sectionTitle}>一言</Text>
+              <Text style={sectionTitle}>お問い合わせ内容</Text>
               <Text style={sectionText}>{content}</Text>
             </Section>
             {type === 'admin' && ip && (

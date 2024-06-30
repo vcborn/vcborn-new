@@ -1,11 +1,4 @@
-import { Container } from '@react-email/container'
-import { Head } from '@react-email/head'
-import { Html } from '@react-email/html'
-import { Img } from '@react-email/img'
-import { Link } from '@react-email/link'
-import { Preview } from '@react-email/preview'
-import { Section } from '@react-email/section'
-import { Text } from '@react-email/text'
+import { Container, Html, Img, Head, Link, Preview, Section, Text } from '@react-email/components'
 import * as React from 'react'
 
 interface EmailProps {
@@ -22,7 +15,7 @@ interface EmailProps {
   ip?: string
 }
 
-export const Email: React.FC<Readonly<EmailProps>> = ({
+const Email: React.FC<Readonly<EmailProps>> = ({
   type = 'client',
   name = '山田太郎',
   furigana = 'やまだたろう',
@@ -39,7 +32,7 @@ export const Email: React.FC<Readonly<EmailProps>> = ({
     <Html>
       <Head>
         <link rel='preconnect' href='https://fonts.googleapis.com/' />
-        <link rel='preconnect' href='https://fonts.gstatic.com/' crossOrigin="" />
+        <link rel='preconnect' href='https://fonts.gstatic.com/' crossOrigin='' />
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700&amp;display=swap'
@@ -55,7 +48,7 @@ export const Email: React.FC<Readonly<EmailProps>> = ({
           <Section style={logoContainer}>
             <Link href='https://vcborn.com'>
               <Img
-                src='https://console.vcborn.com/assets/a4fc9b2d-fa40-4d8b-b063-4ae78b7e1560.png'
+                src='https://images.ctfassets.net/s2zt25idp87p/4bYij62XDbFt8sJZ9Rfzex/c66a91f68e9b54cf70eae93cd61f10d5/logo.png?h=200'
                 width='200'
                 height='45'
                 alt='VCborn'
@@ -139,38 +132,38 @@ export const Email: React.FC<Readonly<EmailProps>> = ({
 
           <table style={footerLogos} border={0} cellPadding='0' cellSpacing='10' align='left'>
             <tr>
-              <td align='left' valign='top'>
+              <td align='left' valign='middle'>
                 <Img
-                  src='https://console.vcborn.com/assets/a4fc9b2d-fa40-4d8b-b063-4ae78b7e1560.png'
+                  src='https://images.ctfassets.net/s2zt25idp87p/4bYij62XDbFt8sJZ9Rfzex/c66a91f68e9b54cf70eae93cd61f10d5/logo.png?h=180'
                   width='180'
                   height='40'
-                  alt='Slack'
+                  alt='VCborn'
                 />
               </td>
-              <td align='right' valign='top'>
+              <td align='right' valign='middle'>
                 <Link href='https://twitter.com/vcborn_support'>
                   <Img
-                    src='https://console.vcborn.com/assets/1e5b5dbb-51f4-4797-b4e0-81c7f475377c.png'
-                    width='40'
-                    height='40'
-                    alt='Twitter'
+                    src='https://images.ctfassets.net/s2zt25idp87p/13ScfNJiReJ7pHjPQdXyE1/8891833448f5e35113186ca87623086c/logo-black.png?h=40'
+                    width='30'
+                    height='30'
+                    alt='X'
                     style={socialMediaIcon}
                   />
                 </Link>
                 <Link href='https://www.youtube.com/@vcborn'>
                   <Img
-                    src='https://console.vcborn.com/assets/8296b65f-ffef-4847-bf2b-bd0a023604fe.png'
-                    width='40'
-                    height='40'
+                    src='https://images.ctfassets.net/s2zt25idp87p/7GkoXNCFPXie2TWeVQFIFL/9ddea47762a4e18aa00329e36ad2fa79/youtube-logo.png?w=40'
+                    width='43'
+                    height='30'
                     alt='YouTube'
                     style={socialMediaIcon}
                   />
                 </Link>
                 <Link href='https://github.com/vcborn'>
                   <Img
-                    src='https://console.vcborn.com/assets/d8846c74-d23f-48e3-a358-b0e3638f104a.png'
-                    width='40'
-                    height='40'
+                    src='https://images.ctfassets.net/s2zt25idp87p/6xezkzT9GB2Y39eXgcM9nt/70d240374facdaa0e13191dc3aee719d/github-mark.png'
+                    width='30'
+                    height='30'
                     alt='GitHub'
                     style={socialMediaIcon}
                   />
@@ -291,3 +284,5 @@ const text = {
   fontSize: '14px',
   lineHeight: '24px',
 }
+
+export default Email

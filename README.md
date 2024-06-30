@@ -13,13 +13,14 @@ Version: `2`
 - 他
 
 ## 記事の追加・編集
-https://console.vcborn.com
+
+Contentfulから行ってください。
 
 ## 構造
 
 ### emails
 
-HTML メールのテンプレートです。
+HTMLメールのテンプレートです。
 
 ### public
 

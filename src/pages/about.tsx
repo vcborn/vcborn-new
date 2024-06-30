@@ -4,36 +4,26 @@ import { FaGlobe, FaYoutube, FaGithub, FaDiscord } from 'react-icons/fa'
 import nl2br from 'react-nl2br'
 import Layout, { siteTitle } from '@/components/layout'
 import { useLocale } from '@/hooks/useLocale'
-import { getDirectusClient } from '@/lib/directus'
-
-type Creator = {
-  username: string
-  projects: Array<string>
-  description: string | null
-  homepage: string | null
-  twitter: string | null
-  youtube: string | null
-  github: string | null
-  discord: string | null
-  avatar: string
-}
-type PageProps = {
-  creators: Creator[]
-}
+import contentfulClient from '@/lib/contentful'
+import { Asset, EntryCollection } from 'contentful'
+import { TypeCreatorsSkeleton } from '@/types/contentful'
 
 export const getStaticProps = async (context) => {
-  const directus = await getDirectusClient()
-  const res = await directus.items('members').readByQuery({
-    sort: ['username'],
+  const creators = await contentfulClient.getEntries({
+    content_type: 'creators',
+    order: ['fields.username'],
   })
-  const creators = res.data
 
   return {
     props: { creators },
   }
 }
 
-const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
+const Creators = ({
+  creators,
+}: {
+  creators: EntryCollection<TypeCreatorsSkeleton, undefined, string>
+}) => {
   const { t } = useLocale()
   return (
     <Layout home={undefined}>
@@ -67,7 +57,7 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
             </span>
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            {creators.map((item, index) => {
+            {creators.items.map((item, index) => {
               return (
                 <div className='relative shadow-md duration-200 hover:shadow-sm' key={index}>
                   <div className='border-r-[100px] border-b-[100px] border-transparent border-r-primary inline-block absolute right-0'></div>
@@ -75,32 +65,32 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
                     <div className='flex flex-row items-center gap-4'>
                       <div className='relative shrink-0 w-16 h-16 md:h-24 md:w-24 object-cover object-center'>
                         <Image
-                          src={`https://console.vcborn.com/assets/${item.avatar}`}
+                          src={`https:${(item.fields.avatar as Asset).fields.file.url}`}
                           fill={true}
-                          alt={item.username}
+                          alt={item.fields.username}
                           className='rounded-full object-cover'
                         />
                       </div>
                       <div>
-                        <h3 className='text-xl md:text-2xl font-bold'>{item.username}</h3>
-                        <p className='font-medium'>{item.description}</p>
+                        <h3 className='text-xl md:text-2xl font-bold'>{item.fields.username}</h3>
+                        <p className='font-medium'>{item.fields.description}</p>
                       </div>
                     </div>
                     <div>
                       <ul className='flex flex-row flex-wrap my-2'>
-                        {item.projects.map((project, index) => {
+                        {item.fields.projects.map((project, index) => {
                           return (
                             <li className='font-medium pr-1.5 py-1 whitespace-nowrap' key={index}>
-                              {project} {index + 1 !== item.projects.length && '/'}
+                              {project} {index + 1 !== item.fields.projects.length && '/'}
                             </li>
                           )
                         })}
                       </ul>
                     </div>
                     <div className='flex flex-row gap-2 my-2 text-lg'>
-                      {item.homepage && (
+                      {item.fields.homepage && (
                         <a
-                          href={item.homepage}
+                          href={item.fields.homepage}
                           target='_blank'
                           rel='noopener noreferrer'
                           className='group'
@@ -113,9 +103,9 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
                           </div>
                         </a>
                       )}
-                      {item.twitter && (
+                      {item.fields.twitter && (
                         <a
-                          href={'https://twitter.com/' + item.twitter}
+                          href={item.fields.twitter}
                           target='_blank'
                           rel='noopener noreferrer'
                           className='group'
@@ -127,16 +117,14 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
                               xmlns='http://www.w3.org/2000/svg'
                               className='fill-gray-400 duration-200 group-hover:fill-gray-500'
                             >
-                              <path
-                                d='M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z'
-                              />
+                              <path d='M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z' />
                             </svg>
                           </div>
                         </a>
                       )}
-                      {item.youtube && (
+                      {item.fields.youtube && (
                         <a
-                          href={item.youtube}
+                          href={item.fields.youtube}
                           target='_blank'
                           rel='noopener noreferrer'
                           className='group'
@@ -149,9 +137,9 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
                           </div>
                         </a>
                       )}
-                      {item.github && (
+                      {item.fields.github && (
                         <a
-                          href={'https://github.com/' + item.github}
+                          href={item.fields.github}
                           target='_blank'
                           rel='noopener noreferrer'
                           className='group'
@@ -164,9 +152,9 @@ const Creators: React.FC<PageProps> = ({ creators }: PageProps) => {
                           </div>
                         </a>
                       )}
-                      {item.discord && (
+                      {item.fields.discord && (
                         <a
-                          href={item.discord}
+                          href={item.fields.discord}
                           target='_blank'
                           rel='noopener noreferrer'
                           className='group'

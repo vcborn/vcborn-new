@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { FaEnvelope, FaFileAlt, FaCloud, FaCircleNotch } from 'react-icons/fa'
 import Footer from '@/components/Footer'
 import Header from '@/components/memberHeader'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 type Inputs = {
   services: Array<string>
@@ -19,6 +20,9 @@ type Inputs = {
 
 const Request: React.FC = () => {
   const { data: session, status } = useSession()
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   const {
     register,
     handleSubmit,
@@ -28,6 +32,11 @@ const Request: React.FC = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     document.getElementById('load').classList.remove('hidden')
+    if (!executeRecaptcha) {
+      console.log('Execute recaptcha not yet available')
+      return
+    }
+    const reCaptchaToken = await executeRecaptcha('requestForm')
     const services = data.services.filter(Boolean)
     const pass = data.pass ? data.pass : 'なし'
     const card = data.card ? '希望する' : '希望しない'
@@ -39,6 +48,7 @@ const Request: React.FC = () => {
         pass: pass,
         services: services,
         card: card,
+        token: reCaptchaToken,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -179,32 +189,6 @@ const Request: React.FC = () => {
                     <input
                       type='checkbox'
                       className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${1}`)}
-                      id='cloud'
-                      value='NextCloud'
-                    />
-                    <label className='text-lg ml-2' htmlFor='cloud'>
-                      NextCloud
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${2}`)}
-                      id='wiki'
-                      value='Wiki'
-                    />
-                    <label className='text-lg ml-2' htmlFor='wiki'>
-                      Wiki
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
                       {...register(`services.${3}`)}
                       id='blog'
                       value='ブログ'
@@ -218,64 +202,12 @@ const Request: React.FC = () => {
                     <input
                       type='checkbox'
                       className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${4}`)}
-                      id='directus-news'
-                      value='Directus(News)'
-                    />
-                    <label className='text-lg ml-2' htmlFor='directus-news'>
-                      Directus（ニュース記事管理）
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${5}`)}
-                      id='directus-support'
-                      value='Directus(Support)'
-                    />
-                    <label className='text-lg ml-2' htmlFor='directus-support'>
-                      Directus（サポート記事管理）
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${6}`)}
-                      id='directus-member'
-                      value='Directus(Member)'
-                    />
-                    <label className='text-lg ml-2' htmlFor='directus-member'>
-                      Directus（メンバー情報管理）
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
                       {...register(`services.${7}`)}
                       id='youtube'
                       value='YouTube'
                     />
                     <label className='text-lg ml-2' htmlFor='youtube'>
                       YouTube
-                    </label>
-                  </div>
-
-                  <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='border-gray-300 duration-200 text-primary focus:ring-primary focus:ring-offset-2 focus:ring-opacity-50'
-                      {...register(`services.${8}`)}
-                      id='chatwoot'
-                      value='Chatwoot'
-                    />
-                    <label className='text-lg ml-2' htmlFor='chatwoot'>
-                      Chatwoot（サポート）
                     </label>
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer'
 import requestIp from 'request-ip'
-import Email from '@/emails/join'
+import Email from '@/emails/contact'
 import { LimitChecker } from '@/lib/limitChecker'
 
 const limitChecker = LimitChecker()
@@ -55,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     attachments: [],
     embeds: [
       {
-        title: '新規応募',
+        title: '新規お問い合わせ',
         color: 1455209,
         fields: [
           {
@@ -67,27 +67,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             value: `${req.body.email}`,
           },
           {
-            name: 'Twitter',
-            value: `[${req.body.twitter}](https://twitter.com/${req.body.twitter.slice(1)})`,
+            name: 'お問い合わせ項目',
+            value: `${req.body.subject}`,
           },
           {
-            name: '所属中のグループ',
-            value: `${req.body.group || "なし"}`,
-          },
-          {
-            name: '平均浮上日数',
-            value: `${req.body.active}`,
-          },
-          {
-            name: '入りたい部署',
-            value: `${req.body.departments.join(', ')}`,
-          },
-          {
-            name: '実績',
-            value: `${req.body.works || "なし"}`
-          },
-          {
-            name: '一言',
+            name: 'お問い合わせ内容',
             value: `${req.body.message}`,
           },
           {
@@ -103,11 +87,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     name: req.body.name,
     furigana: req.body.furigana,
     email: req.body.email,
-    twitter: req.body.twitter,
-    group: req.body.group,
-    active: req.body.active,
-    works: req.body.works,
-    departments: req.body.departments.join(', '),
+    subject: req.body.subject,
     content: htmlMsg,
     ip: clientIp
   }
@@ -127,15 +107,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     await transporter.sendMail({
-      from: '"VCborn 応募受付" <support@vcborn.com>',
+      from: '"VCborn サポート" <support@vcborn.com>',
       to: "support@vcborn.com",
-      subject: "【管理者確認】新規応募がありました",
+      subject: "【管理者確認】新規お問い合わせがありました",
       html: hostMessage
     })
     await transporter.sendMail({
-      from: '"VCborn 応募受付" <support@vcborn.com>',
+      from: '"VCborn サポート" <support@vcborn.com>',
       to: req.body.email,
-      subject: "【VCborn】ご応募ありがとうございます",
+      subject: "【VCborn】お問い合わせを受け付けました",
       html: clientMessage
     })
     await axios.post(hookUrl, postData, config)

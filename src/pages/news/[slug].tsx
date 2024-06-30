@@ -5,19 +5,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Adsense from '@/components/Adsense'
 import Layout, { siteTitle } from '@/components/layout'
-import { getDirectusClient } from '@/lib/directus'
+import contentfulClient from '@/lib/contentful'
+import { TypeNewsSkeleton } from '@/types/contentful'
+import { Asset, Entry } from 'contentful'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { Document } from '@contentful/rich-text-types'
 
-const Post = (props) => {
+const Post = ({ article }: { article: Entry<TypeNewsSkeleton> }) => {
   return (
     <Layout home={undefined}>
       <Head>
-        <title>{`${props.article.title} | ${siteTitle}`}</title>
-        <meta name='og:title' content={`${props.article.title} | ${siteTitle}`} />
+        <title>{`${article.fields.title} | ${siteTitle}`}</title>
+        <meta name='og:title' content={`${article.fields.title} | ${siteTitle}`} />
         <meta
           property='og:image'
           content={
-            props.article.thumbnail
-              ? `https://console.vcborn.com/assets/${props.article.thumbnail}`
+            article.fields.thumbnail
+              ? `https:${(article.fields.thumbnail as Asset).fields.file.url}`
               : `${process.env.NEXT_PUBLIC_SITE_URL}/images/ogp.jpg`
           }
         />
@@ -34,23 +38,22 @@ const Post = (props) => {
           </Link>
         </div>
         <article className='col-span-3 md:col-span-2 pt-10 max-w-4xl'>
-          {props.article.thumbnail && (
+          {article.fields.thumbnail && (
             <Image
-              src={`https://console.vcborn.com/assets/${props.article.thumbnail}`}
-              alt={props.article.title}
+              src={`https:${(article.fields.thumbnail as Asset).fields.file.url}`}
+              alt={article.fields.title as string}
               className='mb-5'
               width={856}
               height={482}
             />
           )}
-          <h1 className='text-4xl font-bold mb-3'>{props.article.title}</h1>
+          <h1 className='text-4xl font-bold mb-3'>{article.fields.title as string}</h1>
           <time className='text-gray-500 text-lg mb-8 block'>
-            {format(new Date(props.article.date_created), 'yyyy.MM.dd')}
+            {format(new Date(article.fields.date_created as string), 'yyyy.MM.dd')}
           </time>
-          <div
-            dangerouslySetInnerHTML={{ __html: props.article.content }}
-            className='prose lg:prose-xl dark:prose-invert'
-          />
+          <div className='prose lg:prose-xl dark:prose-invert'>
+            {documentToReactComponents(article.fields.content as Document)}
+          </div>
         </article>
       </div>
       <Adsense />
@@ -61,29 +64,28 @@ const Post = (props) => {
 export default Post
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const directus = await getDirectusClient()
-  const slugs = await directus.items('news').readByQuery({
-    fields: ['id'],
-  })
+  const posts = await contentfulClient.getEntries<TypeNewsSkeleton>({ content_type: 'news' })
 
-  const paths = slugs.data.map((slug) => ({
-    params: { slug: slug.id },
+  const paths = posts.items.map((post) => ({
+    params: { slug: post.fields.slug },
   }))
 
   return { paths, fallback: false }
 }
 
 export const getStaticProps = async (context) => {
-  const directus = await getDirectusClient()
-  const article = await directus.items('news').readOne(context.params.slug)
+  const article = await contentfulClient.getEntries<TypeNewsSkeleton>({
+    content_type: 'news',
+    'fields.slug': context.params.slug,
+  })
 
-  if (!article) {
+  if (!article || !article.items.length || !article.items[0]) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { article },
+    props: { article: article.items[0] },
   }
 }

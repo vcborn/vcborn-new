@@ -23,7 +23,7 @@ const moduleExports = {
     return config
   },
   images: {
-    domains: ['console.vcborn.com', 'snapcraft.io', 'get.microsoft.com'],
+    domains: ['console.vcborn.com', 'snapcraft.io', 'get.microsoft.com', 'images.ctfassets.net'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
