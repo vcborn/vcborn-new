@@ -16,7 +16,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.22.1",
+    "@contentful/rich-text-react-renderer": "^16.0.1",
     "@fontsource/noto-sans-jp": "^5.0.19",
     "@fontsource/noto-sans-kr": "^5.0.19",
     "@fontsource/noto-sans-sc": "^5.0.19",
