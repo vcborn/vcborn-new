@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { FaGithub, FaYoutube, FaDiscord } from 'react-icons/fa'
+import { FaGithub, FaYoutube } from 'react-icons/fa'
 import { GoLinkExternal } from 'react-icons/go'
 import { IoGlobeSharp } from 'react-icons/io5'
 import { useLocale } from '@/hooks/useLocale'
@@ -81,18 +81,6 @@ function Footer() {
               className='p-2 text-[1.2rem] group'
             >
               <FaGithub
-                size={35}
-                className='fill-gray-400 group-hover:fill-gray-500 duration-100'
-              />
-            </a>
-            <a
-              href='https://discord.gg/2jRRMesqgr'
-              target='_blank'
-              rel='noopener noreferrer'
-              aria-label='Discord'
-              className='p-2 text-[1.2rem] group'
-            >
-              <FaDiscord
                 size={35}
                 className='fill-gray-400 group-hover:fill-gray-500 duration-100'
               />
