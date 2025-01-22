@@ -21,6 +21,7 @@ export default class MyDocument extends Document {
               src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
             />
           )}
+          <meta name='Hatena::Bookmark' content='nocomment' />
         </Head>
         <body>
           <Main />
